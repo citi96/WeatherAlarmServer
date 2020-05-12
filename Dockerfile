@@ -1,4 +1,5 @@
 FROM openjdk:11
-COPY ./target/classes/com/citi/WeatherAlarmDB/ /tmp
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} WeatherAlarmServer.jar
 WORKDIR /temp
-ENTRYPOINT ["java", "WeatherAlarmDbApplication"]
+ENTRYPOINT ["java", "-jar", "/WeatherAlarmServer.jar"]
