@@ -141,11 +141,11 @@ public class WeatherReadManager {
 
     public void setAlarmTimeBasedOnWeather(Alarm alarm, SetAlarm setAlarm, WeatherRead weatherRead) {
         if (alarm.getWeatherConditions() == null || (alarm.getAlarmTime() == null && alarm.getWeatherConditions().contains(weatherRead.getWeather()))
-                || (alarm.getWeatherAlarmTime().getTime() < alarm.getAlarmTime().getTime() && alarm.getWeatherConditions().contains(weatherRead.getWeather()))
-                || alarm.getAlarmTime().getTime() < alarm.getWeatherAlarmTime().getTime()) {
+                || (alarm.getWeatherAlarmTime().compareTo(alarm.getAlarmTime()) < 0 && alarm.getWeatherConditions().contains(weatherRead.getWeather()))
+                || alarm.getAlarmTime().compareTo(alarm.getWeatherAlarmTime()) < 0) {
             setAlarm.setHasToBeSet(true);
             setAlarm.setOtherTime(null);
-        } else if (alarm.getWeatherAlarmTime().getTime() < alarm.getAlarmTime().getTime() && !alarm.getWeatherConditions().contains(weatherRead.getWeather())) {
+        } else if (alarm.getWeatherAlarmTime().compareTo(alarm.getAlarmTime()) < 0  && !alarm.getWeatherConditions().contains(weatherRead.getWeather())) {
             setAlarm.setHasToBeSet(true);
             setAlarm.setOtherTime(alarm.getAlarmTime());
         } else {

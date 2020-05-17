@@ -9,6 +9,7 @@ import com.citi.WeatherAlarmDB.Models.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class AlarmService {
     @Autowired
     private AlarmManager alarmManager;
 
-    public Alarm addAlarm(String alarmName, String uuid, Date alarmTime, Date weatherAlarmTime, String[] weatherConditions,
+    public Alarm addAlarm(String alarmName, String uuid, LocalTime alarmTime, LocalTime weatherAlarmTime, String[] weatherConditions,
                           String days, String ringtone, String ringtoneUri, boolean vibrate)
             throws CustomerNotFoundException, CustomerNotPremiumException, IllegalArgumentException {
         Customer customer = alarmManager.getCustomerByUuid(uuid);
@@ -42,7 +43,7 @@ public class AlarmService {
         return alarmManager.findAlarmsByCustomer(customer);
     }
 
-    public Alarm editAlarm(String uuid, long alarmId, String alarmName, Date alarmTime, Date weatherAlarmTime, String[] weatherConditions,
+    public Alarm editAlarm(String uuid, long alarmId, String alarmName, LocalTime alarmTime, LocalTime weatherAlarmTime, String[] weatherConditions,
                            String days, String ringtone, String ringtoneUri, boolean vibrate, boolean isEnabled)
             throws CustomerNotFoundException, WrongAlarmIdException {
         Customer customer = alarmManager.getCustomerByUuid(uuid);

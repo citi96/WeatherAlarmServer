@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,8 +23,8 @@ public class AlarmController {
     private AlarmService alarmService;
 
     @PostMapping("/addAlarm")
-    public ResponseEntity<Alarm> addAlarm(@RequestParam String alarmName, String uuid, @DateTimeFormat(pattern = "HH:mm") Date alarmTime,
-                                          @DateTimeFormat(pattern = "HH:mm") Date weatherAlarmTime, String[] weatherConditions, String days,
+    public ResponseEntity<Alarm> addAlarm(@RequestParam String alarmName, String uuid, @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime alarmTime,
+                                          @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime weatherAlarmTime, String[] weatherConditions, String days,
                                           String ringtone, String ringtoneUri, boolean vibrate) {
         Alarm alarm;
         try {
@@ -58,8 +59,8 @@ public class AlarmController {
     }
 
     @PutMapping ("/editAlarm")
-    public ResponseEntity<Alarm> editAlarm(@RequestParam long alarmId, String alarmName, String uuid, @DateTimeFormat(pattern = "HH:mm") Date alarmTime,
-                                           @DateTimeFormat(pattern = "HH:mm") Date weatherAlarmTime, String[] weatherConditions, String days,
+    public ResponseEntity<Alarm> editAlarm(@RequestParam long alarmId, String alarmName, String uuid, @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime alarmTime,
+                                           @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime weatherAlarmTime, String[] weatherConditions, String days,
                                            String ringtone, String ringtoneUri, boolean vibrate, boolean isEnabled) {
         Alarm alarm = null;
         try {

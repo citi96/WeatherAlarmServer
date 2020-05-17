@@ -2,12 +2,13 @@ package com.citi.WeatherAlarmDB.Models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalTime;
 import java.util.Date;
 
 public class SetAlarm {
     private boolean hasToBeSet;
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date otherTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime otherTime;
     private String weather;
     private String weatherTag;
     private int degrees;
@@ -23,11 +24,11 @@ public class SetAlarm {
         this.hasToBeSet = hasToBeSet;
     }
 
-    public Date getOtherTime() {
+    public LocalTime getOtherTime() {
         return otherTime;
     }
 
-    public void setOtherTime(Date weatherAlarmTime) {
+    public void setOtherTime(LocalTime weatherAlarmTime) {
         this.otherTime = weatherAlarmTime;
     }
 

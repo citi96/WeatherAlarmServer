@@ -3,6 +3,7 @@ package com.citi.WeatherAlarmDB.Models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,12 +22,12 @@ public class Alarm {
     private Customer customer;
 
     @Column
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date alarmTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime alarmTime;
 
     @Column
-    @DateTimeFormat(pattern = "HH:mm")
-    private Date weatherAlarmTime;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalTime weatherAlarmTime;
 
     @ManyToMany
     private List<WeatherCondition> weatherConditions;
@@ -73,19 +74,19 @@ public class Alarm {
         this.customer = customer;
     }
 
-    public Date getAlarmTime() {
+    public LocalTime getAlarmTime() {
         return alarmTime;
     }
 
-    public void setAlarmTime(Date alarmTime) {
+    public void setAlarmTime(LocalTime alarmTime) {
         this.alarmTime = alarmTime;
     }
 
-    public Date getWeatherAlarmTime() {
+    public LocalTime getWeatherAlarmTime() {
         return weatherAlarmTime;
     }
 
-    public void setWeatherAlarmTime(Date weatherAlarmTime) {
+    public void setWeatherAlarmTime(LocalTime weatherAlarmTime) {
         this.weatherAlarmTime = weatherAlarmTime;
     }
 

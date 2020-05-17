@@ -12,6 +12,7 @@ import com.citi.WeatherAlarmDB.repositories.WeatherConditionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class AlarmManager {
         return alarmRepository.findAlarmsByCustomer(customer);
     }
 
-    public Alarm editAlarm(Alarm alarm, String alarmName, Date alarmTime, Date weatherAlarmTime, String[] weatherConditions,
+    public Alarm editAlarm(Alarm alarm, String alarmName, LocalTime alarmTime, LocalTime weatherAlarmTime, String[] weatherConditions,
                            String days, String ringtone, String ringtoneUri, boolean vibrate, boolean isEnabled) throws IllegalArgumentException {
         alarm.setName(alarmName);
         alarm.setAlarmTime(alarmTime);

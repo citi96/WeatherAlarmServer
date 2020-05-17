@@ -27,9 +27,8 @@ public class WeatherRead implements Serializable {
     @Column(updatable = false)
     private int degrees;
 
-    @Column(insertable = false, updatable = false)
-    @Generated(GenerationTime.INSERT)
-    private Date time;
+    @Column(updatable = false)
+    private Date time = new Date();
 
     public WeatherRead() {
     }
@@ -71,7 +70,9 @@ public class WeatherRead implements Serializable {
     }
 
     public void setTime(Date time) {
-        this.time = time;
+        if(this.time == null){
+            this.time = time;
+        }
     }
 
     public int getDegrees() {
