@@ -13,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -33,7 +32,7 @@ public class AlarmController {
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         } catch (CustomerNotFoundException e) {
             return handleCustomerNotFoundException(e).build();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -58,7 +57,7 @@ public class AlarmController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED);
     }
 
-    @PutMapping ("/editAlarm")
+    @PutMapping("/editAlarm")
     public ResponseEntity<Alarm> editAlarm(@RequestParam long alarmId, String alarmName, String uuid, @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime alarmTime,
                                            @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime weatherAlarmTime, String[] weatherConditions, String days,
                                            String ringtone, String ringtoneUri, boolean vibrate, boolean isEnabled) {
@@ -69,6 +68,21 @@ public class AlarmController {
         } catch (CustomerNotFoundException e) {
             return handleCustomerNotFoundException(e).build();
         } catch (WrongAlarmIdException | IllegalArgumentException e) {
+            Logger.getAnonymousLogger().severe(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(alarm);
+    }
+
+    @DeleteMapping("/deleteAlarm")
+    public ResponseEntity<Alarm> deleteAlarm(@RequestParam String uuid, long alarmId) {
+        Alarm alarm;
+        try {
+            alarm = alarmService.deleteAlarm(uuid, alarmId);
+        } catch (CustomerNotFoundException e) {
+            return handleCustomerNotFoundException(e).build();
+        } catch (WrongAlarmIdException e) {
             Logger.getAnonymousLogger().severe(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

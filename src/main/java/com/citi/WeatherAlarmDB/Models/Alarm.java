@@ -29,7 +29,7 @@ public class Alarm {
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime weatherAlarmTime;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<WeatherCondition> weatherConditions;
 
     @Column

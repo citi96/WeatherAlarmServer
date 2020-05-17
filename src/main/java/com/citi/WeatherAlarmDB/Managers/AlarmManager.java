@@ -98,4 +98,8 @@ public class AlarmManager {
 
         return weatherConditionList;
     }
+
+    public void deleteAlarm(Alarm alarm) {
+        alarmRepository.delete(alarm);
+    }
 }

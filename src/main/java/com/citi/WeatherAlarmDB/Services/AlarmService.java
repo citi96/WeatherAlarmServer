@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -50,5 +49,14 @@ public class AlarmService {
         Alarm alarm = alarmManager.getAlarmByCustomerAndId(customer, alarmId);
 
         return alarmManager.editAlarm(alarm, alarmName, alarmTime, weatherAlarmTime, weatherConditions, days, ringtone, ringtoneUri, vibrate, isEnabled);
+    }
+
+    public Alarm deleteAlarm(String uuid, long alarmId) throws CustomerNotFoundException, WrongAlarmIdException {
+        Customer customer = alarmManager.getCustomerByUuid(uuid);
+        Alarm alarm = alarmManager.getAlarmByCustomerAndId(customer, alarmId);
+        
+
+        alarmManager.deleteAlarm(alarm);
+        return alarm;
     }
 }
